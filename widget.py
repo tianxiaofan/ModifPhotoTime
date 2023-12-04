@@ -65,7 +65,7 @@ def writeTime(file_path,file_times):
 
 
 
-from PySide6.QtWidgets import QApplication, QWidget
+from PySide6.QtWidgets import QApplication, QWidget, QFileDialog, QMessageBox
 
 # Important:
 # You need to run the following command to generate the ui_form.py file
@@ -78,6 +78,56 @@ class Widget(QWidget):
         super().__init__(parent)
         self.ui = Ui_Widget()
         self.ui.setupUi(self)
+        self.ui.pushButton_SelectPhotoPath.clicked.connect(self.selectPhotoPath)
+        self.ui.pushButton_SelectFilePath.clicked.connect(self.selectFile)
+        self.ui.pushButton_PhotoModif.clicked.connect(self.startModifyPhoto)
+        self.ui.pushButton_FileModif.clicked.connect(self.startModifFile)
+
+    # 选择一个文件夹
+    def selectPhotoPath(self):
+        dialog = QFileDialog()
+        dialog.setFileMode(QFileDialog.Directory)
+        dialog.setOption(QFileDialog.ShowDirsOnly, True)
+        dialog.exec()
+        # 获取选择的文件夹路径
+        path = dialog.selectedFiles()[0]
+        # 显示选择的文件夹路径
+        self.ui.lineEdit_PhotoPath.setText(path)
+
+    def startModifyPhoto(self):
+        # 获取选择的文件夹路径
+        path = self.ui.lineEdit_PhotoPath.text()
+        if path == "":
+            QMessageBox.information(self, "提示", "请选择一个文件夹")
+            return
+        if self.ui.lineEdit_PhotoCustomTime.text() == "":
+            QMessageBox.information(self, "提示", "请输入时间")
+            return
+        modif = ModifTime2ShootTime(path)
+        modif.custom_file_time = self.ui.lineEdit_PhotoCustomTime.text()
+        modif.modifDirAllFile()
+
+
+    # 选择一个文件
+    def selectFile(self):
+        dialog = QFileDialog()
+        dialog.setFileMode(QFileDialog.AnyFile)
+        dialog.exec()
+        # 获取选择的文件路径
+        path = dialog.selectedFiles()[0]
+        # 显示选择的文件路径
+        self.ui.lineEdit_FilePath.setText(path)
+
+    def startModifFile(self):
+        # 获取选择的文件路径
+        path = self.ui.lineEdit_FilePath.text()
+        if path == "":
+            QMessageBox.information(self, "提示", "请选择一个文件")
+            return
+        if self.ui.lineEdit_FileCustomTime.text() == "":
+            QMessageBox.information(self, "提示", "请输入时间")
+            return
+        writeTime(path, self.ui.lineEdit_FileCustomTime.text())
 
 
 if __name__ == "__main__":

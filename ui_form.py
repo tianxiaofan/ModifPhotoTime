@@ -22,7 +22,7 @@ class Ui_Widget(object):
     def setupUi(self, Widget):
         if not Widget.objectName():
             Widget.setObjectName(u"Widget")
-        Widget.resize(590, 395)
+        Widget.resize(590, 389)
         self.groupBox = QGroupBox(Widget)
         self.groupBox.setObjectName(u"groupBox")
         self.groupBox.setGeometry(QRect(10, 10, 561, 171))
@@ -47,7 +47,7 @@ class Ui_Widget(object):
         self.progressBar.setValue(0)
         self.groupBox_2 = QGroupBox(Widget)
         self.groupBox_2.setObjectName(u"groupBox_2")
-        self.groupBox_2.setGeometry(QRect(20, 210, 551, 151))
+        self.groupBox_2.setGeometry(QRect(10, 190, 561, 151))
         self.lineEdit_FilePath = QLineEdit(self.groupBox_2)
         self.lineEdit_FilePath.setObjectName(u"lineEdit_FilePath")
         self.lineEdit_FilePath.setGeometry(QRect(10, 30, 321, 23))
@@ -68,7 +68,7 @@ class Ui_Widget(object):
         self.label_FileMessage.setGeometry(QRect(20, 120, 53, 15))
         self.label_Message = QLabel(Widget)
         self.label_Message.setObjectName(u"label_Message")
-        self.label_Message.setGeometry(QRect(20, 370, 551, 16))
+        self.label_Message.setGeometry(QRect(10, 350, 551, 16))
 
         self.retranslateUi(Widget)
 
@@ -76,7 +76,7 @@ class Ui_Widget(object):
     # setupUi
 
     def retranslateUi(self, Widget):
-        Widget.setWindowTitle(QCoreApplication.translate("Widget", u"Widget", None))
+        Widget.setWindowTitle(QCoreApplication.translate("Widget", u"\u56fe\u7247\u5c5e\u6027\u65f6\u95f4\u4fee\u6539", None))
         self.groupBox.setTitle(QCoreApplication.translate("Widget", u"\u4fee\u6539\u4e00\u4e2a\u76ee\u5f55\u4e0b\u6240\u6709\u56fe\u7247\u7684\u521b\u5efa\u65f6\u95f4,\u4fee\u6539\u65f6\u95f4,\u8bbf\u95ee\u65f6\u95f4\u4e3a\u62cd\u6444\u65f6\u95f4", None))
         self.pushButton_SelectPhotoPath.setText(QCoreApplication.translate("Widget", u"\u9009\u62e9\u56fe\u7247\u8def\u5f84", None))
         self.label.setText(QCoreApplication.translate("Widget", u"\u8bbe\u7f6e\u4e00\u4e2a\u9ed8\u8ba4\u65f6\u95f4\uff0c\u5982\u679c\u56fe\u7247\u7684\u62cd\u6444\u65f6\u95f4\u6ca1\u6709\u83b7\u53d6\u5230\uff0c\u5219\u4f7f\u7528\u6b64\u65f6\u95f4(\u683c\u5f0f: 2016:06:15 19:20:00)", None))
