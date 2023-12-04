@@ -1,0 +1,433 @@
+[
+    {
+        "classes": [
+            {
+                "className": "QAxBaseObject",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "classContext",
+                        "read": "classContext",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "ulong",
+                        "user": false,
+                        "write": "setClassContext"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "control",
+                        "read": "control",
+                        "required": false,
+                        "reset": "resetControl",
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QString",
+                        "user": false,
+                        "write": "setControl"
+                    }
+                ],
+                "qualifiedClassName": "QAxBaseObject",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "code",
+                                "type": "int"
+                            },
+                            {
+                                "name": "source",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "desc",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "help",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "exception",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "name",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "propertyChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "name",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "argc",
+                                "type": "int"
+                            },
+                            {
+                                "name": "argv",
+                                "type": "void*"
+                            }
+                        ],
+                        "name": "signal",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    },
+                    {
+                        "access": "public",
+                        "name": "QAxObjectInterface"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "qaxobject.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "QAxScript",
+                "object": true,
+                "qualifiedClassName": "QAxScript",
+                "signals": [
+                    {
+                        "access": "public",
+                        "name": "entered",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "finished",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "result",
+                                "type": "QVariant"
+                            }
+                        ],
+                        "name": "finished",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "code",
+                                "type": "int"
+                            },
+                            {
+                                "name": "source",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "description",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "help",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "finished",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "state",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "stateChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "code",
+                                "type": "int"
+                            },
+                            {
+                                "name": "description",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "sourcePosition",
+                                "type": "int"
+                            },
+                            {
+                                "name": "sourceText",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "error",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            },
+            {
+                "className": "QAxScriptManager",
+                "object": true,
+                "qualifiedClassName": "QAxScriptManager",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "script",
+                                "type": "QAxScript*"
+                            },
+                            {
+                                "name": "code",
+                                "type": "int"
+                            },
+                            {
+                                "name": "description",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "sourcePosition",
+                                "type": "int"
+                            },
+                            {
+                                "name": "sourceText",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "error",
+                        "returnType": "void"
+                    }
+                ],
+                "slots": [
+                    {
+                        "access": "private",
+                        "arguments": [
+                            {
+                                "name": "o",
+                                "type": "QObject*"
+                            }
+                        ],
+                        "name": "objectDestroyed",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "private",
+                        "arguments": [
+                            {
+                                "name": "code",
+                                "type": "int"
+                            },
+                            {
+                                "name": "description",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "sourcePosition",
+                                "type": "int"
+                            },
+                            {
+                                "name": "sourceText",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "scriptError",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "qaxscript.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "QAxSelect",
+                "object": true,
+                "qualifiedClassName": "QAxSelect",
+                "slots": [
+                    {
+                        "access": "private",
+                        "arguments": [
+                            {
+                                "type": "QModelIndex"
+                            }
+                        ],
+                        "name": "onActiveXListCurrentChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "private",
+                        "name": "onActiveXListActivated",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "private",
+                        "arguments": [
+                            {
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "onFilterLineEditChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QDialog"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "qaxselect.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "QAxBaseWidget",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "classContext",
+                        "read": "classContext",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "ulong",
+                        "user": false,
+                        "write": "setClassContext"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "control",
+                        "read": "control",
+                        "required": false,
+                        "reset": "resetControl",
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QString",
+                        "user": false,
+                        "write": "setControl"
+                    }
+                ],
+                "qualifiedClassName": "QAxBaseWidget",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "code",
+                                "type": "int"
+                            },
+                            {
+                                "name": "source",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "desc",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "help",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "exception",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "name",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "propertyChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "name",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "argc",
+                                "type": "int"
+                            },
+                            {
+                                "name": "argv",
+                                "type": "void*"
+                            }
+                        ],
+                        "name": "signal",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QWidget"
+                    },
+                    {
+                        "access": "public",
+                        "name": "QAxObjectInterface"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "qaxwidget.h",
+        "outputRevision": 68
+    }
+]
