@@ -15,4 +15,4 @@ pyinstaller --onedir --hidden-import=win32timezone --noconsole widget.py
 
 界面
 
-![界面](.\QQ截图20231205170543.png)
+![界面](./QQ截图20231205170543.png)
