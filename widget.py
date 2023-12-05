@@ -8,9 +8,20 @@ from pywintypes import Time # 可以忽视这个 Time 报错（运行程序还�
 import time
 
 
+from PySide6.QtWidgets import QApplication, QWidget, QFileDialog, QMessageBox,QStyleFactory
+# Important:
+# You need to run the following command to generate the ui_form.py file
+#     pyside6-uic form.ui -o ui_form.py, or
+#     pyside2-uic form.ui -o ui_form.py
+from ui_form import Ui_Widget
+from PySide6.QtCore import QObject, Signal
 
-class ModifTime2ShootTime:
+
+class ModifTime2ShootTime(QObject):
+    processMessage = Signal(str)  # 信号声明
+
     def __init__(self, path):
+        super().__init__()
         self.dir_path = path
         self.current_file_path = ""
         self.current_file_time = ""
@@ -18,18 +29,21 @@ class ModifTime2ShootTime:
 
     def modifDirAllFile(self):
         file_name_list = os.listdir(self.dir_path)
+
         # 从文件夹中获取文件文件
         for file_name in file_name_list:
-            if not file_name.endswith(".JPG"):
+            if not file_name.lower().endswith(".jpg"):
                 continue
             # 生成具体文件路径
-            self.current_file_path = self.dir_path + file_name
+            self.current_file_path = self.dir_path + "/" + file_name
             print(self.current_file_path)
             # 提取拍摄时间
             self.readShootTime()
             print(self.current_file_time)
             # 写入到 创建时间 修改时间 访问时间
             writeTime(self.current_file_path, self.custom_file_time)
+
+            self.processMessage.emit(self.current_file_path + " --> " + self.current_file_time)  # 发射信号
 
             # 休息一下，防止太快
             time.sleep(0.01)
@@ -65,13 +79,6 @@ def writeTime(file_path,file_times):
 
 
 
-from PySide6.QtWidgets import QApplication, QWidget, QFileDialog, QMessageBox
-
-# Important:
-# You need to run the following command to generate the ui_form.py file
-#     pyside6-uic form.ui -o ui_form.py, or
-#     pyside2-uic form.ui -o ui_form.py
-from ui_form import Ui_Widget
 
 class Widget(QWidget):
     def __init__(self, parent=None):
@@ -93,6 +100,7 @@ class Widget(QWidget):
         path = dialog.selectedFiles()[0]
         # 显示选择的文件夹路径
         self.ui.lineEdit_PhotoPath.setText(path)
+        self.ui.textEdit.clear()
 
     def startModifyPhoto(self):
         # 获取选择的文件夹路径
@@ -104,9 +112,12 @@ class Widget(QWidget):
             QMessageBox.information(self, "提示", "请输入时间")
             return
         modif = ModifTime2ShootTime(path)
+        modif.processMessage.connect(self.onProcessMessage)
         modif.custom_file_time = self.ui.lineEdit_PhotoCustomTime.text()
         modif.modifDirAllFile()
 
+    def onProcessMessage(self, value):
+        self.ui.textEdit.append(value)
 
     # 选择一个文件
     def selectFile(self):
@@ -128,10 +139,13 @@ class Widget(QWidget):
             QMessageBox.information(self, "提示", "请输入时间")
             return
         writeTime(path, self.ui.lineEdit_FileCustomTime.text())
+        self.ui.textEdit.append(path + " --> " +self.ui.lineEdit_FileCustomTime.text())
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    # 设置界面风格，这里使用 "Fusion" 风格
+    app.setStyle(QStyleFactory.create("fusion"))
     widget = Widget()
     widget.show()
     sys.exit(app.exec())
