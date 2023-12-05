@@ -15,7 +15,10 @@ from PySide6.QtWidgets import QApplication, QWidget, QFileDialog, QMessageBox,QS
 #     pyside2-uic form.ui -o ui_form.py
 from ui_form import Ui_Widget
 from PySide6.QtCore import QObject, Signal
+from PySide6.QtCore import QCoreApplication
 
+
+time_format = "%Y:%m:%d %H:%M:%S"  # 时间格式
 
 class ModifTime2ShootTime(QObject):
     processMessage = Signal(str)  # 信号声明
@@ -47,6 +50,9 @@ class ModifTime2ShootTime(QObject):
 
             # 休息一下，防止太快
             time.sleep(0.01)
+            QCoreApplication.processEvents()  # 处理事件，确保界面更新
+        self.processMessage.emit("end --> ")  # 发射信号
+
 
     def readShootTime(self):
         exif_dict = piexif.load(self.current_file_path)
@@ -62,11 +68,10 @@ def timeOffsetAndStruct(times, format, offset):
   return time.localtime(time.mktime(time.strptime(times, format)) + offset)
 
 def writeTime(file_path,file_times):
-    format = "%Y:%m:%d %H:%M:%S"  # 时间格式
     # 进行时间偏移 1S，避免创建时间，修改时间，访问时间都一样
-    cTime_t = timeOffsetAndStruct(file_times, format, 0)
-    mTime_t = timeOffsetAndStruct(file_times, format, 1)
-    aTime_t = timeOffsetAndStruct(file_times, format, 2)
+    cTime_t = timeOffsetAndStruct(file_times, time_format, 0)
+    mTime_t = timeOffsetAndStruct(file_times, time_format, 1)
+    aTime_t = timeOffsetAndStruct(file_times, time_format, 2)
 
     fh = CreateFile(file_path, GENERIC_READ | GENERIC_WRITE, 0, None, OPEN_EXISTING, 0, 0)
 
@@ -111,6 +116,10 @@ class Widget(QWidget):
         if self.ui.lineEdit_PhotoCustomTime.text() == "":
             QMessageBox.information(self, "提示", "请输入时间")
             return
+        # 检查时间格式是否正确 "%Y:%m:%d %H:%M:%S"
+        if not self.checkTimeFormat(self.ui.lineEdit_PhotoCustomTime.text(),time_format):
+            QMessageBox.information(self, "提示", "时间格式不正确")
+            return
         modif = ModifTime2ShootTime(path)
         modif.processMessage.connect(self.onProcessMessage)
         modif.custom_file_time = self.ui.lineEdit_PhotoCustomTime.text()
@@ -138,8 +147,19 @@ class Widget(QWidget):
         if self.ui.lineEdit_FileCustomTime.text() == "":
             QMessageBox.information(self, "提示", "请输入时间")
             return
+        # 检查时间格式是否正确 "%Y:%m:%d %H:%M:%S"
+        if not self.checkTimeFormat(self.ui.lineEdit_FileCustomTime.text(),time_format):
+            QMessageBox.information(self, "提示", "时间格式不正确")
+            return
         writeTime(path, self.ui.lineEdit_FileCustomTime.text())
         self.ui.textEdit.append(path + " --> " +self.ui.lineEdit_FileCustomTime.text())
+
+    def checkTimeFormat(self, timeStr, time_format):
+        try:
+            time.strptime(timeStr, time_format)
+            return True
+        except ValueError:
+            return False
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 12.0.0, 2023-12-04T20:59:08. -->
+<!-- Written by QtCreator 12.0.0, 2023-12-05T15:05:39. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -149,7 +149,6 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">PythonEditor.RunConfiguration.E:/TMP/ModifPhotoTime/widget.py</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">E:/TMP/ModifPhotoTime/widget.py</value>
     <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">true</value>
-    <value type="QString" key="PythonEditor.RunConfiguation.Interpreter">{fa55263a-363a-4006-8575-151f73aa2115}</value>
     <value type="QString" key="PythonEditor.RunConfiguation.Script">E:\TMP\ModifPhotoTime\widget.py</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
