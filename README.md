@@ -9,3 +9,10 @@
 #打包
 pyinstaller --onedir --hidden-import=win32timezone --noconsole widget.py 
 ```
+
+构建环境：
+使用PySide6
+
+界面
+
+![界面](.\QQ截图20231205170543.png)
