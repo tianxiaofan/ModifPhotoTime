@@ -6,6 +6,7 @@ from win32file import CreateFile, SetFileTime, GetFileTime, CloseHandle
 from win32file import GENERIC_READ, GENERIC_WRITE, OPEN_EXISTING
 from pywintypes import Time # 可以忽视这个 Time 报错（运行程序还是没问题的）
 import time
+import datetime
 
 
 from PySide6.QtWidgets import QApplication, QWidget, QFileDialog, QMessageBox,QStyleFactory
@@ -16,9 +17,16 @@ from PySide6.QtWidgets import QApplication, QWidget, QFileDialog, QMessageBox,QS
 from ui_form import Ui_Widget
 from PySide6.QtCore import QObject, Signal
 from PySide6.QtCore import QCoreApplication
+from enum import Enum
 
 
 time_format = "%Y:%m:%d %H:%M:%S"  # 时间格式
+
+class TimeType(Enum):
+    NoneTime = 1
+    CustomTime = 2
+    CreatTime =  3
+    ForceTime = 4
 
 class ModifTime2ShootTime(QObject):
     processMessage = Signal(str)  # 信号声明
@@ -29,6 +37,7 @@ class ModifTime2ShootTime(QObject):
         self.current_file_path = ""
         self.current_file_time = ""
         self.custom_file_time = "" # 如果没有获取到时间，则使用默认时间
+        self.time_type = TimeType.NoneTime
 
     def modifDirAllFile(self):
         file_name_list = os.listdir(self.dir_path)
@@ -43,10 +52,13 @@ class ModifTime2ShootTime(QObject):
             # 提取拍摄时间
             self.readShootTime()
             print(self.current_file_time)
-            # 写入到 创建时间 修改时间 访问时间
-            writeTime(self.current_file_path, self.custom_file_time)
 
-            self.processMessage.emit(self.current_file_path + " --> " + self.current_file_time)  # 发射信号
+            if self.current_file_time == "":
+                self.processMessage.emit(self.current_file_path + " --> 未获取到时间，不修改")  # 发射信号
+            else:
+                # 写入到 创建时间 修改时间 访问时间
+                writeTime(self.current_file_path, self.current_file_time)
+                self.processMessage.emit(self.current_file_path + " --> " + self.current_file_time)  # 发射信号
 
             # 休息一下，防止太快
             time.sleep(0.01)
@@ -55,13 +67,50 @@ class ModifTime2ShootTime(QObject):
 
 
     def readShootTime(self):
+        if self.time_type == TimeType.ForceTime:
+            self.current_file_time = self.custom_file_time
+            return
+
+        create_time =""
+        shoot_time = ""
+
+        # 获取拍摄时间
         exif_dict = piexif.load(self.current_file_path)
-        # 尝试获取拍摄时间，如果没有获取到，则使用自定义时间
         try:
             time_str = str(exif_dict["Exif"][36868])
-            self.current_file_time = time_str[2:len(time_str) - 1]
+            shoot_time = time_str[2:len(time_str) - 1]
         except:
-            self.current_file_time = self.custom_file_time
+            shoot_time = ""
+        # 获取Exif内文件创建时间
+        try:
+            create_str = str(exif_dict["Exif"][piexif.ExifIFD.DateTimeOriginal])
+            create_time = create_str[2:len(create_str) - 1]
+        except:
+            create_time = ""
+
+        # 如果没有获取到Exif内创建时间，就获取文件创建时间
+        if create_time == "":
+            try:
+                creation_time = os.path.getctime(self.current_file_path)
+                creation_time = datetime.datetime.fromtimestamp(creation_time)
+                create_time = creation_time.strftime(time_format)
+            except:
+                    create_time = ""
+
+        # 如果拍摄时间为空，就用创建时间,如果创建时间也为空，就返回空时间
+        if self.time_type == TimeType.CreatTime:
+            if shoot_time != "":
+                self.current_file_time = shoot_time
+            else:
+                self.current_file_time = create_time
+        elif self.time_type == TimeType.CustomTime:
+            if shoot_time != "":
+                self.current_file_time = shoot_time
+            else:
+                self.current_file_time = self.custom_file_time
+        elif self.time_type == TimeType.NoneTime:
+            self.current_file_time = shoot_time
+
 
 
 def timeOffsetAndStruct(times, format, offset):
@@ -113,16 +162,24 @@ class Widget(QWidget):
         if path == "":
             QMessageBox.information(self, "提示", "请选择一个文件夹")
             return
-        if self.ui.lineEdit_PhotoCustomTime.text() == "":
-            QMessageBox.information(self, "提示", "请输入时间")
-            return
-        # 检查时间格式是否正确 "%Y:%m:%d %H:%M:%S"
-        if not self.checkTimeFormat(self.ui.lineEdit_PhotoCustomTime.text(),time_format):
-            QMessageBox.information(self, "提示", "时间格式不正确")
-            return
+
+        if self.ui.radioButton_CustomTime.isChecked() or self.ui.radioButton_ForceTime.isChecked():
+            # 检查时间格式是否正确 "%Y:%m:%d %H:%M:%S"
+                if not self.checkTimeFormat(self.ui.lineEdit_PhotoCustomTime.text(),time_format):
+                    QMessageBox.information(self, "提示", "时间格式不正确")
+                    return
+
         modif = ModifTime2ShootTime(path)
         modif.processMessage.connect(self.onProcessMessage)
         modif.custom_file_time = self.ui.lineEdit_PhotoCustomTime.text()
+        if self.ui.radioButton_NoUse.isChecked():
+            modif.time_type = TimeType.NoneTime
+        elif self.ui.radioButton_CustomTime.isChecked():
+            modif.time_type = TimeType.CustomTime
+        elif self.ui.radioButton_CreateTime.isChecked():
+            modif.time_type = TimeType.CreatTime
+        elif self.ui.radioButton_ForceTime.isChecked():
+            modif.time_type = TimeType.ForceTime
         modif.modifDirAllFile()
 
     def onProcessMessage(self, value):

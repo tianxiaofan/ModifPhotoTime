@@ -6,184 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>817</width>
-    <height>444</height>
+    <width>648</width>
+    <height>526</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>图片属性时间修改</string>
   </property>
-  <widget class="QGroupBox" name="groupBox">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>50</y>
-     <width>371</width>
-     <height>151</height>
-    </rect>
-   </property>
-   <property name="title">
-    <string>修改一个目录下所有图片的创建时间,修改时间,访问时间为拍摄时间</string>
-   </property>
-   <widget class="QLineEdit" name="lineEdit_PhotoPath">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>40</y>
-      <width>261</width>
-      <height>23</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_SelectPhotoPath">
-    <property name="geometry">
-     <rect>
-      <x>280</x>
-      <y>40</y>
-      <width>80</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>选择图片路径</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>70</y>
-      <width>301</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>设置一个默认时间，如果图片的拍摄时间没有获取到
-则使用此时间(格式: 2016:06:15 19:20:00)</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_PhotoCustomTime">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>110</y>
-      <width>181</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="placeholderText">
-     <string>2016:06:15 19:20:00)</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_PhotoModif">
-    <property name="geometry">
-     <rect>
-      <x>280</x>
-      <y>110</y>
-      <width>80</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>开始修改</string>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QGroupBox" name="groupBox_2">
-   <property name="geometry">
-    <rect>
-     <x>390</x>
-     <y>50</y>
-     <width>411</width>
-     <height>151</height>
-    </rect>
-   </property>
-   <property name="title">
-    <string>将任意一个文件的创建时间,修改时间,访问时间修改为设定时间</string>
-   </property>
-   <widget class="QLineEdit" name="lineEdit_FilePath">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>40</y>
-      <width>251</width>
-      <height>23</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_SelectFilePath">
-    <property name="geometry">
-     <rect>
-      <x>320</x>
-      <y>40</y>
-      <width>80</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>选择文件</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_FileModif">
-    <property name="geometry">
-     <rect>
-      <x>320</x>
-      <y>90</y>
-      <width>80</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>开始修改</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_FileCustomTime">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>90</y>
-      <width>151</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="placeholderText">
-     <string>2016:06:15 19:20:00</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>100</y>
-      <width>53</width>
-      <height>15</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>设置时间:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_FileMessage">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>120</y>
-      <width>53</width>
-      <height>15</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-  </widget>
   <widget class="QScrollArea" name="scrollArea">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>210</y>
-     <width>791</width>
-     <height>221</height>
+     <x>20</x>
+     <y>360</y>
+     <width>611</width>
+     <height>151</height>
     </rect>
    </property>
    <property name="widgetResizable">
@@ -194,8 +30,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>789</width>
-      <height>219</height>
+      <width>609</width>
+      <height>149</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
@@ -236,9 +72,211 @@
     <string notr="true">color: rgb(255, 0, 0);</string>
    </property>
    <property name="text">
-    <string>说明：主要支持图片的属性上的创建时间，修改时间，访问时间的修改，图片后缀格式为JPG或jpg，其它未支持
-使用前请查看图片属性中是否有拍摄时间,如没有,将使用自定义的时间去修改</string>
+    <string>说明：主要支持图片的属性上的创建时间，修改时间，访问时间的修改，图片后缀格式为JPG或jpg，其它未支持</string>
    </property>
+  </widget>
+  <widget class="QTabWidget" name="tabWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>40</y>
+     <width>611</width>
+     <height>311</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="tab">
+    <attribute name="title">
+     <string>修改目录下所有文件</string>
+    </attribute>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>581</width>
+       <height>261</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>修改一个目录下所有图片的创建时间,修改时间,访问时间</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>自定义时间：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0" colspan="3">
+       <widget class="QRadioButton" name="radioButton_CreateTime">
+        <property name="text">
+         <string>使用拍摄时间，如未获取到拍摄时间，则使用Exif内的创建时间,
+如果创Exif内的建时间也未获取到，则尝试使用文件属性的创建时间，如果还是获取不到，则不修改</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+        <property name="autoRepeat">
+         <bool>false</bool>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" colspan="2">
+       <widget class="QLineEdit" name="lineEdit_PhotoPath"/>
+      </item>
+      <item row="9" column="0">
+       <widget class="QPushButton" name="pushButton_PhotoModif">
+        <property name="text">
+         <string>开始修改</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="lineEdit_PhotoCustomTime">
+        <property name="placeholderText">
+         <string>2016:06:15 19:20:00</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="3">
+       <widget class="QRadioButton" name="radioButton_NoUse">
+        <property name="text">
+         <string>使用拍摄时间，如未获取到拍摄时间，则不修改</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+        <property name="autoRepeat">
+         <bool>false</bool>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="8" column="0" colspan="3">
+       <widget class="QRadioButton" name="radioButton_ForceTime">
+        <property name="text">
+         <string>不使用拍摄时间，强制使用自定义时间</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+        <property name="autoRepeat">
+         <bool>false</bool>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="pushButton_SelectPhotoPath">
+        <property name="text">
+         <string>选择图片文件夹</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0" colspan="3">
+       <widget class="QRadioButton" name="radioButton_CustomTime">
+        <property name="text">
+         <string>使用拍摄时间，如未获取到拍摄时间，则使用自定义时间</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+        <property name="autoRepeat">
+         <bool>false</bool>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_2">
+    <attribute name="title">
+     <string>单文件修改</string>
+    </attribute>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>491</width>
+       <height>111</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>将任意一个文件的创建时间,修改时间,访问时间修改为设定时间</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="0" colspan="2">
+       <widget class="QLineEdit" name="lineEdit_FilePath"/>
+      </item>
+      <item row="0" column="2">
+       <widget class="QPushButton" name="pushButton_SelectFilePath">
+        <property name="text">
+         <string>选择文件</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>设置时间:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="lineEdit_FileCustomTime">
+        <property name="placeholderText">
+         <string>2016:06:15 19:20:00</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QPushButton" name="pushButton_FileModif">
+        <property name="text">
+         <string>开始修改</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_FileMessage">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <resources/>
